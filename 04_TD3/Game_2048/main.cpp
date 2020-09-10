@@ -6,14 +6,14 @@ using namespace std;
 int main()
 {
     int grille[4][4];
-    char cdj;
+    int g = 1;
 
     InitialiserGrille(grille);
-    AfficherGrille(grille);
-
-    cout << "votre déplacement : ";
-    cin >> cdj;
-    Deplace
+    do{
+        AfficherGrille(grille);
+        DeplaceGrille(grille);
+        AjouterValeurCase(grille);
+    }while(g != 0);
     return 0;
 }
 

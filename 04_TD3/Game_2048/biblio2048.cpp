@@ -13,6 +13,15 @@ int TirerAleatoire()
       return (((rand() % 2) +1 ) * 2);
 }
 
+void AjouterValeurCase(int gri[][4]){
+    int x, y;
+    do{
+         x = rand() % 4;
+         y = rand() % 4;
+    }while(gri[x][y] != 0);
+    gri[rand() % 4][rand() % 4] = TirerAleatoire();
+}
+
 void InitialiserGrille(int gri[][4]){
     InitialiserAleatoire();
     for(int i=0; i<4; i++){
@@ -20,7 +29,7 @@ void InitialiserGrille(int gri[][4]){
             gri[i][u] = 0;
         }
     }
-    gri[rand() % 4][rand() % 4] = TirerAleatoire();
+    AjouterValeurCase(gri);
 }
 
 void AfficherGrille(int gri[][4]){
@@ -52,7 +61,14 @@ int RechercherValeurMax(int gri[][4]){
     return valMax;
 }
 
-void DeplaceGrille(int gri[][4], char cdj){
+void DeplaceGrille(int gri[][4]){
+
+    using namespace std;
+    char cdj;
+    cout << "Votre déplacement : ";
+    cin >> cdj;
+    cout << endl;
+
     switch(cdj){
         case 'D' : for(int i=0; i<4; i++){
             int nbInd = 3;
@@ -66,6 +82,7 @@ void DeplaceGrille(int gri[][4], char cdj){
                 }
             }
         } break;
+
         case 'G' : for(int i=0; i<4; i++){
             int nbInd = 0;
             for(int u=0; u<4; u++){
@@ -78,9 +95,10 @@ void DeplaceGrille(int gri[][4], char cdj){
                 }
             }
         } break;
-        case 'H' : for(int i=0; i<4; i++){
+
+        case 'H' : for(int u=0; u<4; u++){
             int nbInd = 0;
-            for(int u=0; u<4; u++){
+            for(int i=0; i<4; i++){
                 if(gri[i][u] != 0){
                     gri[nbInd][u] = gri[i][u];
                     if(i!=nbInd){
@@ -89,10 +107,11 @@ void DeplaceGrille(int gri[][4], char cdj){
                     nbInd++;
                 }
             }
-        }
-        case 'B' : for(int i=0; i<4; i++){
+        }break;
+
+        case 'B' : for(int u=0; u<4; u++){
             int nbInd = 3;
-            for(int u=3; u>=0; u--){
+            for(int i=3; i>=0; i--){
                 if(gri[i][u] != 0){
                     gri[nbInd][u] = gri[i][u];
                     if(i!=nbInd){
