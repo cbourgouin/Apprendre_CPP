@@ -1,0 +1,5 @@
+Enregistrer
+Enregistrer sous
+Envoyer
+Editer
+Quitter
