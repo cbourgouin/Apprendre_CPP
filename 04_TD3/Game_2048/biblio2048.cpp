@@ -91,6 +91,11 @@ void DeplaceGrille(int gri[][4]){
                     if(u!=nbInd){
                         gri[i][u] = 0;
                     }
+                    if(u!=0){
+                        if(gri[u] == gri[u-1]){
+                            gri[u-1];
+                        }
+                    }
                     nbInd++;
                 }
             }
