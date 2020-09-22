@@ -8,17 +8,40 @@ void AfficherGrille(Jeu2048 _leJeu);
 int main()
 {
     Jeu2048 leJeu;
-    AfficherGrille(leJeu);
-
+    bool fin;
+    char direction;
+    do{
+        AfficherGrille(leJeu);
+        do{
+            cin >> direction;
+        }while(direction != 'G' && direction != 'g' && direction != 'D' && direction != 'd' && direction != 'H' && direction != 'h' && direction != 'B' && direction != 'b' && direction != 'F' && direction != 'f' );
+        switch (direction) {
+        case 'g' : direction = 'G';
+            break;
+        case 'd' : direction = 'D';
+            break;
+        case 'h' : direction = 'H';
+            break;
+        case 'b' : direction = 'B';
+            break;
+        }
+        if(direction == 'f' || direction == 'F')
+            fin = true;
+        leJeu.JouerCoup(direction);
+    }while (fin == true);
     return 0;
 }
 
 void AfficherGrille(Jeu2048 _leJeu){
+    int score = _leJeu.ObtenirScore();
+    int nbCoup = _leJeu.ObtenirNbCoups();
     int grille[NB_CASE][NB_CASE];
+
+    system("clear");
     _leJeu.ObtenirGrille(grille);
 
     //afichage de l'interface
-    cout << "Score : " << _leJeu.ObtenirScore() << " | Nombre de coups : " << _leJeu.ObtenirNbCoups() << " |" << endl;
+    cout << "Score : " << score << " | Nombre de coups : " << nbCoup << " |" << endl;
 
     //affichage de la grille
     for(int l=0; l<NB_CASE; l++){

@@ -84,14 +84,16 @@ void Jeu2048::PlacerNouvelleTuile()
     grille[l][c] = TirerAleatoire(TUILE);
 }
 
-void Jeu2048::Calculer()
+bool Jeu2048::Calculer()
 {
+    bool verif = false;
     switch (direction) {
     case 'G':for(int l=0; l<NB_CASE; l++){
              for(int c=0; c<NB_CASE-1; c++){
                 if(grille[l][c] == grille[l][c+1]){
                     grille[l][c] = grille[l][c]*2;
                     grille[l][c+1] = 0;
+                    verif = true;
                 }
             }
         }
@@ -101,6 +103,7 @@ void Jeu2048::Calculer()
                if(grille[l][c] == grille[l][c-1]){
                    grille[l][c] = grille[l][c]*2;
                    grille[l][c-1] = 0;
+                   verif = true;
                }
            }
        }
@@ -110,6 +113,7 @@ void Jeu2048::Calculer()
                if(grille[l][c] == grille[l-1][c]){
                    grille[l][c] = grille[l][c]*2;
                    grille[l-1][c] = 0;
+                   verif = true;
                }
            }
        }
@@ -119,11 +123,13 @@ void Jeu2048::Calculer()
                if(grille[l][c] == grille[l+1][c]){
                    grille[l][c] = grille[l][c]*2;
                    grille[l+1][c] = 0;
+                   verif = true;
                }
            }
        }
        break;
     }
+    return verif;
 }
 
 void Jeu2048::Deplacer()

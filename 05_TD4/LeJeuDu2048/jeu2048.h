@@ -26,10 +26,10 @@ public:
 private:
     int  TirerAleatoire(MODE_ALEATOIRE _mode);
     void PlacerNouvelleTuile();
-    void Calculer();
+    bool Calculer();
     void Deplacer();
     void CalculerScore();
-    void RechercherFinDePartie();
+    bool RechercherFinDePartie();
 };
 
 #endif // JEU2049_H
