@@ -2,6 +2,8 @@
 #include <time.h>
 #include <iostream>
 #include <iomanip>
+#include <string.h>
+
 #ifndef JEU2049_H
 #define JEU2049_H
 #define NB_CASE 4

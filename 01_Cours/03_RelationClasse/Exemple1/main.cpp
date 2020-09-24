@@ -1,11 +1,13 @@
 #include <iostream>
 #include "carton.h"
+#include "caissedebouteilles.h"
 
 using namespace std;
 
 int main()
 {
-    Carton monCarton(5, 5, 5, 3.58);
+    CaisseDeBouteilles maCaisse(30, 30, 20, 8, 33);
+    cout << maCaisse.Contenant::CalculerVolume();
 
     return 0;
 }

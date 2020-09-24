@@ -8,27 +8,15 @@ void AfficherGrille(Jeu2048 _leJeu);
 int main()
 {
     Jeu2048 leJeu;
-    bool fin;
+    bool fin = false;
     char direction;
     do{
         AfficherGrille(leJeu);
-        do{
-            cin >> direction;
-        }while(direction != 'G' && direction != 'g' && direction != 'D' && direction != 'd' && direction != 'H' && direction != 'h' && direction != 'B' && direction != 'b' && direction != 'F' && direction != 'f' );
-        switch (direction) {
-        case 'g' : direction = 'G';
-            break;
-        case 'd' : direction = 'D';
-            break;
-        case 'h' : direction = 'H';
-            break;
-        case 'b' : direction = 'B';
-            break;
-        }
-        if(direction == 'f' || direction == 'F')
-            fin = true;
-        leJeu.JouerCoup(direction);
-    }while (fin == true);
+        cin >> direction;
+        direction = toupper(direction);
+        if(strchr("BHGD",direction) != nullptr)
+            fin = leJeu.JouerCoup(direction);
+    }while (direction != 'f' && fin == false);
     return 0;
 }
 

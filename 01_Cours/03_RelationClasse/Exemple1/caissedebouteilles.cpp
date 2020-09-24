@@ -14,3 +14,8 @@ CaisseDeBouteilles::~CaisseDeBouteilles()
 {
     cout << "destructeur de caisseDeBouteille" << endl;
 }
+
+int CaisseDeBouteilles::CalculerVolume()
+{
+    return contenance / nbBouteilles;
+}
