@@ -8,7 +8,8 @@ using namespace std;
 class Barre
 {
 public:
-    Barre();
+    Barre(string _reference, string _name);
+    void AfficherCaracteristiques();
 protected:
     string reference;
     string name;
