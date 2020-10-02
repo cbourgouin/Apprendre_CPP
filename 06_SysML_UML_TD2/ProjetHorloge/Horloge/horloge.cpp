@@ -121,7 +121,7 @@ void Horloge::ActualiserHeure()
 {
     time_t valCourante = time(NULL);
     double seconde = difftime(valCourante, valAvant);
-    if(seconde > 1){
+    if(seconde > 60){
         valAvant = valCourante;
         if(AvancerMinutes())
             AvancerHeures();
