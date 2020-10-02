@@ -32,7 +32,7 @@ public:
     TOUCHES_CLAVIER ScruterClavier();
 
 private:
-    struct termios etatInitial ;
+    struct termios etatInitial; ///Etat du clavier au repos.
 
 };
 

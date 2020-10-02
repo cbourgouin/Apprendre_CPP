@@ -12,12 +12,14 @@
  */
 
 #include <cstdio>
-
 #include "clavier.h"
 
+/**
+ * @brief Clavier::Clavier
+ * @details Constructeur de la classe Clavier, initialise le clavier
+ */
 Clavier::Clavier() {
     struct termios etatCourant;
-    char toucheAvant, touche;
 
     tcgetattr(STDIN_FILENO, &etatInitial);
     etatCourant = etatInitial;
@@ -31,14 +33,21 @@ Clavier::Clavier() {
     etatCourant.c_cc[VMIN] = 0;
     etatCourant.c_cc[VTIME] = 0;
     tcsetattr(STDIN_FILENO, TCSANOW, &etatCourant);
-    read(STDIN_FILENO, &toucheAvant, 1);
-    touche = toucheAvant;
 }
 
+/**
+ * @brief Clavier::~Clavier
+ * @details Destructeur de la classe Clavier
+ */
 Clavier::~Clavier() {
     tcsetattr(STDIN_FILENO, TCSANOW, &etatInitial);
 }
 
+/**
+ * @brief Clavier::ScruterClavier
+ * @detail donne le mode de l'horloge
+ * @return
+ */
 TOUCHES_CLAVIER Clavier::ScruterClavier()
 {
 
