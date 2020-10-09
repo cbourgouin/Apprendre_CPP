@@ -37,7 +37,6 @@ public:
     void ChangerMode();
     void ReculerHeure();
     void ReculerMinute();
-    void Operation();
     void ActualiserHeure();
     TOUCHES_CLAVIER Controler(TOUCHES_CLAVIER _laTouche);
 };
