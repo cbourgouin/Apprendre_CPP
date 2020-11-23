@@ -28,7 +28,7 @@ class Ui_ClientWidget
 {
 public:
     QGroupBox *groupBoxServeur;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -45,7 +45,7 @@ public:
     QLabel *labelEtatConnexion;
     QTextEdit *textEditEtatConnexion;
     QGroupBox *groupBoxClient;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_3;
     QPushButton *pushButtonNomMachine;
@@ -66,22 +66,22 @@ public:
         groupBoxServeur = new QGroupBox(ClientWidget);
         groupBoxServeur->setObjectName(QString::fromUtf8("groupBoxServeur"));
         groupBoxServeur->setGeometry(QRect(30, 30, 471, 131));
-        widget = new QWidget(groupBoxServeur);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 30, 451, 96));
-        horizontalLayout_4 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(groupBoxServeur);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 30, 451, 96));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        labelIPServeur = new QLabel(widget);
+        labelIPServeur = new QLabel(layoutWidget);
         labelIPServeur->setObjectName(QString::fromUtf8("labelIPServeur"));
 
         horizontalLayout->addWidget(labelIPServeur);
 
-        lineEditIpServeur = new QLineEdit(widget);
+        lineEditIpServeur = new QLineEdit(layoutWidget);
         lineEditIpServeur->setObjectName(QString::fromUtf8("lineEditIpServeur"));
 
         horizontalLayout->addWidget(lineEditIpServeur);
@@ -91,18 +91,18 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        labelPortServeur = new QLabel(widget);
+        labelPortServeur = new QLabel(layoutWidget);
         labelPortServeur->setObjectName(QString::fromUtf8("labelPortServeur"));
 
         horizontalLayout_2->addWidget(labelPortServeur);
 
-        spinBoxPort = new QSpinBox(widget);
+        spinBoxPort = new QSpinBox(layoutWidget);
         spinBoxPort->setObjectName(QString::fromUtf8("spinBoxPort"));
         spinBoxPort->setFrame(true);
         spinBoxPort->setReadOnly(false);
         spinBoxPort->setButtonSymbols(QAbstractSpinBox::NoButtons);
         spinBoxPort->setKeyboardTracking(true);
-        spinBoxPort->setMaximum(100000);
+        spinBoxPort->setMaximum(9999);
         spinBoxPort->setValue(8888);
 
         horizontalLayout_2->addWidget(spinBoxPort);
@@ -112,7 +112,7 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        pushButtonQuitter = new QPushButton(widget);
+        pushButtonQuitter = new QPushButton(layoutWidget);
         pushButtonQuitter->setObjectName(QString::fromUtf8("pushButtonQuitter"));
 
         horizontalLayout_3->addWidget(pushButtonQuitter);
@@ -121,7 +121,7 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer);
 
-        pushButtonConnexion = new QPushButton(widget);
+        pushButtonConnexion = new QPushButton(layoutWidget);
         pushButtonConnexion->setObjectName(QString::fromUtf8("pushButtonConnexion"));
 
         horizontalLayout_3->addWidget(pushButtonConnexion);
@@ -134,12 +134,12 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        labelEtatConnexion = new QLabel(widget);
+        labelEtatConnexion = new QLabel(layoutWidget);
         labelEtatConnexion->setObjectName(QString::fromUtf8("labelEtatConnexion"));
 
         verticalLayout->addWidget(labelEtatConnexion);
 
-        textEditEtatConnexion = new QTextEdit(widget);
+        textEditEtatConnexion = new QTextEdit(layoutWidget);
         textEditEtatConnexion->setObjectName(QString::fromUtf8("textEditEtatConnexion"));
 
         verticalLayout->addWidget(textEditEtatConnexion);
@@ -149,31 +149,32 @@ public:
 
         groupBoxClient = new QGroupBox(ClientWidget);
         groupBoxClient->setObjectName(QString::fromUtf8("groupBoxClient"));
+        groupBoxClient->setEnabled(false);
         groupBoxClient->setGeometry(QRect(30, 170, 471, 171));
-        widget1 = new QWidget(groupBoxClient);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 30, 451, 131));
-        horizontalLayout_5 = new QHBoxLayout(widget1);
+        layoutWidget1 = new QWidget(groupBoxClient);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 30, 451, 131));
+        horizontalLayout_5 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        pushButtonNomMachine = new QPushButton(widget1);
+        pushButtonNomMachine = new QPushButton(layoutWidget1);
         pushButtonNomMachine->setObjectName(QString::fromUtf8("pushButtonNomMachine"));
 
         verticalLayout_3->addWidget(pushButtonNomMachine);
 
-        pushButtonNomUtilisateur = new QPushButton(widget1);
+        pushButtonNomUtilisateur = new QPushButton(layoutWidget1);
         pushButtonNomUtilisateur->setObjectName(QString::fromUtf8("pushButtonNomUtilisateur"));
 
         verticalLayout_3->addWidget(pushButtonNomUtilisateur);
 
-        pushButtonProcesseur = new QPushButton(widget1);
+        pushButtonProcesseur = new QPushButton(layoutWidget1);
         pushButtonProcesseur->setObjectName(QString::fromUtf8("pushButtonProcesseur"));
 
         verticalLayout_3->addWidget(pushButtonProcesseur);
 
-        pushButtonOS = new QPushButton(widget1);
+        pushButtonOS = new QPushButton(layoutWidget1);
         pushButtonOS->setObjectName(QString::fromUtf8("pushButtonOS"));
 
         verticalLayout_3->addWidget(pushButtonOS);
@@ -183,22 +184,22 @@ public:
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        lineEditNomMachine = new QLineEdit(widget1);
+        lineEditNomMachine = new QLineEdit(layoutWidget1);
         lineEditNomMachine->setObjectName(QString::fromUtf8("lineEditNomMachine"));
 
         verticalLayout_4->addWidget(lineEditNomMachine);
 
-        lineEditNomUtilisateur = new QLineEdit(widget1);
+        lineEditNomUtilisateur = new QLineEdit(layoutWidget1);
         lineEditNomUtilisateur->setObjectName(QString::fromUtf8("lineEditNomUtilisateur"));
 
         verticalLayout_4->addWidget(lineEditNomUtilisateur);
 
-        lineEditProcesseur = new QLineEdit(widget1);
+        lineEditProcesseur = new QLineEdit(layoutWidget1);
         lineEditProcesseur->setObjectName(QString::fromUtf8("lineEditProcesseur"));
 
         verticalLayout_4->addWidget(lineEditProcesseur);
 
-        lineEditOS = new QLineEdit(widget1);
+        lineEditOS = new QLineEdit(layoutWidget1);
         lineEditOS->setObjectName(QString::fromUtf8("lineEditOS"));
 
         verticalLayout_4->addWidget(lineEditOS);

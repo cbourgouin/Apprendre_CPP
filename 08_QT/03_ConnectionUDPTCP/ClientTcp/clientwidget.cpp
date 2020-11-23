@@ -31,44 +31,53 @@ ClientWidget::~ClientWidget()
 void ClientWidget::on_pushButtonConnexion_clicked()
 {
     if(ui->pushButtonConnexion->text() != "Déconnexion"){
-        QHostAddress adresse;
-        adresse.operator=(ui->lineEditIpServeur->text());
+        QHostAddress adresse = QHostAddress(ui->lineEditIpServeur->text());
         socketDeDialogueAvecServeur->connectToHost(adresse, ui->spinBoxPort->value());
-        ui->pushButtonConnexion->setText("Déconnexion");
     }else{
         socketDeDialogueAvecServeur->disconnectFromHost();
-        ui->pushButtonConnexion->setText("Connexion");
     }
 }
 
 void ClientWidget::on_pushButtonNomMachine_clicked()
 {
-
+    typeDeDemande="c";
+    socketDeDialogueAvecServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonNomUtilisateur_clicked()
 {
-
+    typeDeDemande="u";
+    socketDeDialogueAvecServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonProcesseur_clicked()
 {
-
+    typeDeDemande="a";
+    socketDeDialogueAvecServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonOS_clicked()
 {
-
+    typeDeDemande="o";
+    socketDeDialogueAvecServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::onQTcpSocket_connected()
 {
+    ui->pushButtonConnexion->setText("Déconnexion");
     ui->textEditEtatConnexion->append("Connecté");
+    ui->groupBoxClient->setEnabled(true);
+    ui->lineEditIpServeur->setEnabled(false);
+    ui->spinBoxPort->setEnabled(false);
 }
 
 void ClientWidget::onQTcpSocket_disconnected()
 {
+    ui->pushButtonConnexion->setText("Connexion");
     ui->textEditEtatConnexion->append("Déconnecté");
+    ui->groupBoxClient->setEnabled(false);
+    ui->lineEditIpServeur->setEnabled(true);
+    ui->spinBoxPort->setEnabled(true);
 }
 
 void ClientWidget::onQTcpSocket_hostFound()
@@ -99,10 +108,23 @@ void ClientWidget::onQTcpSocket_readChannelFinished()
 void ClientWidget::onQTcpSocket_readyRead()
 {
     ui->textEditEtatConnexion->append("prêt pour la lecture");
+    QByteArray reponse = socketDeDialogueAvecServeur->readAll();
+    switch(typeDeDemande.data()->toLatin1()) {
+        case 'c' : ui->lineEditNomMachine->setText(reponse);
+        break;
+        case 'u' : ui->lineEditNomUtilisateur->setText(reponse);
+        break;
+        case 'a' : ui->lineEditProcesseur->setText(reponse);
+        break;
+        case 'o' : ui->lineEditOS->setText(reponse);
+        break;
+    }
 }
 
 void ClientWidget::onQTcpSocket_error(QAbstractSocket::SocketError socketError)
 {
-
+    ui->textEditEtatConnexion->append(socketDeDialogueAvecServeur->errorString());
 }
+
+
 

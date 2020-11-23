@@ -25,7 +25,7 @@
    <property name="title">
     <string>Connexion au serveur</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -139,6 +139,9 @@
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBoxClient">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -150,7 +153,7 @@
    <property name="title">
     <string>Informations Client</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
