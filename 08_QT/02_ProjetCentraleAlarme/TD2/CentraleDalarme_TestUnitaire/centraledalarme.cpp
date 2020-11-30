@@ -7,7 +7,7 @@ CentraleDalarme::CentraleDalarme(const int _tailleCode, QObject *_parent) :
     tailleCode(_tailleCode),
     indiceCourant(0)
 {
-    combinaison = new quint8[tailleCode];
+    combinaison = new quint8;
     for(int i = 0 ; i < tailleCode ; i++)
         combinaison[i]=0;
 

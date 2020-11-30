@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>bouton_poussoir.jpg</file>
+        <file>porte_fermee.png</file>
+        <file>porte_ouverte.png</file>
+    </qresource>
+</RCC>

@@ -241,6 +241,7 @@ DIST          = /opt/Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/spec_post.prf \
+		../ClientTcp/.qmake.stash \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/default_pre.prf \
@@ -458,6 +459,7 @@ Makefile: ../ClientTcp/ClientTcp.pro /opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++/qma
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/default_pre.prf \
@@ -664,6 +666,7 @@ Makefile: ../ClientTcp/ClientTcp.pro /opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++/qma
 /opt/Qt/5.15.0/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt/5.15.0/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt/5.15.0/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt/5.15.0/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt/5.15.0/gcc_64/mkspecs/features/default_pre.prf:
@@ -841,6 +844,13 @@ moc_clientwidget.cpp: ../ClientTcp/clientwidget.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QTcpSocket \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qabstractsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostAddress \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostaddress.h \
 		moc_predefs.h \
 		/opt/Qt/5.15.0/gcc_64/bin/moc
 	/opt/Qt/5.15.0/gcc_64/bin/moc $(DEFINES) --include /home/USERS/ELEVES/SNIR2019/cbourgouin/Apprendre_CPP/08_QT/03_ConnectionUDPTCP/build-ClientTcp-Desktop_Qt_5_15_0_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++ -I/home/USERS/ELEVES/SNIR2019/cbourgouin/Apprendre_CPP/08_QT/03_ConnectionUDPTCP/ClientTcp -I/opt/Qt/5.15.0/gcc_64/include -I/opt/Qt/5.15.0/gcc_64/include/QtWidgets -I/opt/Qt/5.15.0/gcc_64/include/QtGui -I/opt/Qt/5.15.0/gcc_64/include/QtNetwork -I/opt/Qt/5.15.0/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ClientTcp/clientwidget.h -o moc_clientwidget.cpp
@@ -970,6 +980,13 @@ main.o: ../ClientTcp/main.cpp ../ClientTcp/clientwidget.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QTcpSocket \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qabstractsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostAddress \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostaddress.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1083,6 +1100,13 @@ clientwidget.o: ../ClientTcp/clientwidget.cpp ../ClientTcp/clientwidget.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QTcpSocket \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qabstractsocket.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostAddress \
+		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostaddress.h \
 		ui_clientwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clientwidget.o ../ClientTcp/clientwidget.cpp
 

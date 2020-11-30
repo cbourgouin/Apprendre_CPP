@@ -2,6 +2,7 @@
 #define CENTRALEDALARME_H
 
 #include <QObject>
+#include <QVector>
 #define TAILLE_CODE 4
 
 class Clavier;
@@ -17,7 +18,7 @@ public:
 
 private:
     const int tailleCode;
-    quint8 *combinaison;
+    QVector<quint8> combinaison;
     int indiceCourant;
     Clavier *leClavier;
 };

@@ -219,7 +219,7 @@ public:
         ClientWidget->setWindowTitle(QCoreApplication::translate("ClientWidget", "ClientWidget", nullptr));
         groupBoxServeur->setTitle(QCoreApplication::translate("ClientWidget", "Connexion au serveur", nullptr));
         labelIPServeur->setText(QCoreApplication::translate("ClientWidget", "Adresse IP du serveur : ", nullptr));
-        lineEditIpServeur->setText(QCoreApplication::translate("ClientWidget", "172.18.58.83", nullptr));
+        lineEditIpServeur->setText(QCoreApplication::translate("ClientWidget", "172.18.58.73", nullptr));
         labelPortServeur->setText(QCoreApplication::translate("ClientWidget", "Num\303\251ro de port du serveur : ", nullptr));
         pushButtonQuitter->setText(QCoreApplication::translate("ClientWidget", "Quitter", nullptr));
         pushButtonConnexion->setText(QCoreApplication::translate("ClientWidget", "Connexion", nullptr));
