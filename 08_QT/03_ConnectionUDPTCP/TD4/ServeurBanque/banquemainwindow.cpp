@@ -6,10 +6,13 @@ BanqueMainWindow::BanqueMainWindow(QWidget *parent)
     , ui(new Ui::BanqueMainWindow)
 {
     ui->setupUi(this);
+    leServeur = new ServeurBanque(parent);
+    leServeur->Start();
 }
 
 BanqueMainWindow::~BanqueMainWindow()
 {
     delete ui;
+    leServeur->Stop();
 }
 

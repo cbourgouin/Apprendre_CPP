@@ -2,6 +2,8 @@
 #define BANQUEMAINWINDOW_H
 
 #include <QMainWindow>
+#include "serveurbanque.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BanqueMainWindow; }
