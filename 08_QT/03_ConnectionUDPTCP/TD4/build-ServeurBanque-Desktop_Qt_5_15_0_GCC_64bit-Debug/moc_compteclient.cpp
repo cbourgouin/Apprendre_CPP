@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../05_BDD/TD4/ServeurBanque/compteclient.h"
+#include "../../../05_BDD/ServeurBanque/compteclient.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

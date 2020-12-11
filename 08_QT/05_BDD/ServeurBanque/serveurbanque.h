@@ -4,6 +4,7 @@
 #include "compteclient.h"
 #include <QTcpServer>
 #include <QBuffer>
+#include <QJsonArray>
 
 class ServeurBanque : public QTcpServer
 {

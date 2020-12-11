@@ -3,11 +3,7 @@
 
 #include <QMainWindow>
 #include "serveurbanque.h"
-#include <QSqlDatabase>
-#include <QDebug>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QTableWidget>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BanqueMainWindow; }
@@ -21,14 +17,8 @@ public:
     BanqueMainWindow(QWidget *parent = nullptr);
     ~BanqueMainWindow();
 
-private slots:
-    void on_pushButtonConnect_clicked();
-
-    void on_pushButtonInfoComplete_clicked();
-
 private:
     Ui::BanqueMainWindow *ui;
     ServeurBanque *leServeur;
-    QSqlDatabase *bdd;
 };
 #endif // BANQUEMAINWINDOW_H

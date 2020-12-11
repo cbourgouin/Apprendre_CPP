@@ -2,6 +2,9 @@
 #define COMPTECLIENT_H
 
 #include <QTcpSocket>
+#include "interfaceaccesbdbanque.h"
+#include <QJsonObject>
+#include <QJsonArray>
 
 class CompteClient : public QTcpSocket
 {
@@ -12,8 +15,10 @@ public:
     bool Retirer(float montant);
     void Deposer(float montant);
     float ObtenirSolde();
-    void DefinirNumCompte(int nc);
+    void DefinirNumCompte(QJsonObject donne);
     int ObtenirNumCompte();
+    InterfaceAccesBDBanque bd;
+    bool InterfaceAccesBDBanque_compteExiste();
 private:
     int numCompte;
     float solde;

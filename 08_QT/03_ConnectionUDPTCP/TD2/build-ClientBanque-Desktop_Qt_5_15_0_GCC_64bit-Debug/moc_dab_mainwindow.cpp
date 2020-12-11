@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../ClientBanque/dab_mainwindow.h"
+#include "../../../05_BDD/TD2/ClientBanque/dab_mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

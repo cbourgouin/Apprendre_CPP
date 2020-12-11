@@ -51,10 +51,7 @@ void ServeurBanque::onServeurBanque_newConnection()
         connect(newClient, &QTcpSocket::readyRead, this, &ServeurBanque::onCompteClient_readyRead);
         connect(newClient, &QTcpSocket::disconnected, this, &ServeurBanque::onCompteClient_disconnected);
         lesConnexionsClients.append(newClient);
-        int numCompte = 4587;//lesConnexionsClients.last()->ObtenirNumCompte();
-        QString message;
-        message = QString::number(numCompte);
-        EnvoyerMessage(message, lesConnexionsClients.last());
+        EnvoyerMessage("Connecté", lesConnexionsClients.last());
     }
 }
 
@@ -82,6 +79,7 @@ void ServeurBanque::onCompteClient_readyRead()
     QString message;
     int paramNumCompte;
     float param;
+    QJsonObject paramCreate;
     if(!client)
     {
         QMessageBox msg;
@@ -96,10 +94,15 @@ void ServeurBanque::onCompteClient_readyRead()
             if(client->bytesAvailable() >= (qint64)taille){
                 in >> commande;
                 switch (commande.toLatin1()) {
-                case 'N' :in >> paramNumCompte;
-                    client->DefinirNumCompte(paramNumCompte);
-                    message = "Bienvenue sur le compte " + QString::number(client->ObtenirNumCompte());
-                    EnvoyerMessage(message, client);
+                case 'N' :if(client->InterfaceAccesBDBanque_compteExiste()){
+                        message = "Bienvenue sur le compte " + QString::number(client->ObtenirNumCompte());
+                        EnvoyerMessage(message, client);
+                    }
+                    else
+                    {
+                        message = "compte inexistant";
+                        EnvoyerMessage(message, client);
+                    }
                     break;
                 case 'R' : in >> param;
                     client->Retirer(param);
@@ -114,6 +117,8 @@ void ServeurBanque::onCompteClient_readyRead()
                 case 'S' : message = "solde : " + QString::number(client->ObtenirSolde());
                     EnvoyerMessage(message, client);
                     break;
+                case 'C' : in >> paramCreate;
+                    client->DefinirNumCompte(paramCreate);
                 }
             }
         }
