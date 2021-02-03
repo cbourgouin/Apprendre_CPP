@@ -3,49 +3,44 @@
 CompteClient::CompteClient(QObject *parent):
     QTcpSocket(parent)
 {
-
+    bd = new InterfaceAccesBDBanque();
 }
 
 CompteClient::~CompteClient()
 {
-
+    delete bd;
 }
 
 bool CompteClient::Retirer(float montant)
 {
     bool retraitPossible = false;
+    float solde = bd->ObtenirSolde(numCompte);
     if(solde >= montant)
     {
         retraitPossible = true;
-        solde -= montant;
+        bd->MettreAJourLeSolde(numCompte, (solde - montant));
     }
     return retraitPossible;
 }
 
 void CompteClient::Deposer(float montant)
 {
-    solde += montant;
+    float solde = bd->ObtenirSolde(numCompte);
+    bd->MettreAJourLeSolde(numCompte, (solde + montant));
 }
 
 float CompteClient::ObtenirSolde()
 {
-    return solde;
+    return bd->ObtenirSolde(numCompte);
 }
 
-void CompteClient::DefinirNumCompte(QJsonObject donne)
+void CompteClient::DefinirCompte(QJsonObject donne)
 {
-    numCompte = 0;
     double solde = 200;
     QString nom;
     QString prenom;
     QString ville;
     int idAgence = 0;
-
-    if (donne.contains("idCompte"))
-            numCompte = donne["idCompte"].toInt();
-
-    if (donne.contains("solde"))
-            solde = donne["solde"].toDouble();
 
     if (donne.contains("nom") && donne["nom"].isString())
             nom = donne["nom"].toString();
@@ -57,20 +52,30 @@ void CompteClient::DefinirNumCompte(QJsonObject donne)
             ville = donne["ville"].toString();
 
     if (donne.contains("idAgence"))
-            idAgence = donne["Agence"].toInt();
+            idAgence = donne["idAgence"].toInt();
 
 
-    bd.CreerCompte(numCompte, solde, nom, prenom, ville, idAgence);
+    bd->CreerCompte(numCompte, solde, nom, prenom, ville, idAgence);
 }
 
-int CompteClient::ObtenirNumCompte()
+QString CompteClient::ObtenirNomCompte()
 {
-    return numCompte;
+    return bd->ObtenirNom(numCompte);
 }
 
 bool CompteClient::InterfaceAccesBDBanque_compteExiste()
 {
-    return bd.CompteExiste(numCompte);
+    return bd->CompteExiste(numCompte);
+}
+
+void CompteClient::DefinirNumCompte(const int _numCompte)
+{
+    numCompte = _numCompte;
+}
+
+QJsonObject CompteClient::EnvoyerAgence()
+{
+    return bd->ObtenirAgence();
 }
 
 

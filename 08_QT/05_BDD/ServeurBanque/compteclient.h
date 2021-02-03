@@ -15,13 +15,14 @@ public:
     bool Retirer(float montant);
     void Deposer(float montant);
     float ObtenirSolde();
-    void DefinirNumCompte(QJsonObject donne);
-    int ObtenirNumCompte();
-    InterfaceAccesBDBanque bd;
+    void DefinirCompte(QJsonObject donne);
+    QString ObtenirNomCompte();
+    InterfaceAccesBDBanque *bd;
     bool InterfaceAccesBDBanque_compteExiste();
+    void DefinirNumCompte(int _numCompte);
+    QJsonObject EnvoyerAgence();
 private:
     int numCompte;
-    float solde;
 };
 
 #endif // COMPTECLIENT_H

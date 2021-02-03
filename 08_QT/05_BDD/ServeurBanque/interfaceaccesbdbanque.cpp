@@ -15,6 +15,7 @@ InterfaceAccesBDBanque::InterfaceAccesBDBanque(QString hote, QString bd, QString
 
 float InterfaceAccesBDBanque::ObtenirSolde(int numCompte)
 {
+
     QSqlQuery requete;
     float solde;
 
@@ -26,9 +27,34 @@ float InterfaceAccesBDBanque::ObtenirSolde(int numCompte)
         }
         else
         {
-            solde = requete.value("solde").toFloat();
+            while(requete.next())
+            {
+                solde = requete.value("solde").toFloat();
+            }
+
         }
         return solde;
+}
+
+QString InterfaceAccesBDBanque::ObtenirNom(int numCompte)
+{
+    QSqlQuery requete;
+    QString nomComplet;
+
+    requete.prepare("select nom, prenom from comptes where idCompte = :nc ;");
+    requete.bindValue(":nc", numCompte);
+        if(!requete.exec())
+        {
+            qDebug()<<"pb requete "<<requete.lastError();
+        }
+        else
+        {
+            while(requete.next())
+            {
+                nomComplet = requete.value("nom").toString() + " " + requete.value("prenom").toString();
+            }
+        }
+        return nomComplet;
 }
 
 void InterfaceAccesBDBanque::MettreAJourLeSolde(int numCompte, float solde)
@@ -80,4 +106,28 @@ bool InterfaceAccesBDBanque::CompteExiste(int numCompte)
         existe=true;
     }
     return existe;
+}
+
+QJsonObject InterfaceAccesBDBanque::ObtenirAgence()
+{
+    QSqlQuery requete;
+    QJsonObject agence;
+    int i =  1;
+
+    requete.prepare("select nom from agences;");
+        if(!requete.exec())
+        {
+            qDebug()<<this<<"pb requete "<<requete.lastError();
+        }
+        else
+        {
+            //agence = new QJsonObject[requete.size()];
+            while(requete.next())
+            {
+                agence["nomAgence" + i] = requete.value("nom").toString();
+                i++;
+            }
+        }
+
+        return agence;
 }

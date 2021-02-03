@@ -13,6 +13,7 @@ public:
     void Start();
     void Stop();
     void EnvoyerMessage(QString msg, CompteClient *client);
+    void EnvoyerAgence(QJsonObject msg, CompteClient *client);
 private:
     QList<CompteClient *> lesConnexionsClients;
 private slots:

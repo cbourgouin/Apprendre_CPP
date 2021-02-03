@@ -1,12 +1,17 @@
 #include "dab_mainwindow.h"
 #include "ui_dab_mainwindow.h"
 
+/**
+ * @brief DAB_MainWindow::DAB_MainWindow
+ * @param parent
+ * @details Constructeur de l'interface principal
+ */
 DAB_MainWindow::DAB_MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::DAB_MainWindow)
 {
     ui->setupUi(this);
-    socketClientBanque = new QTcpSocket(this);
+    socketClientBanque = new QTcpSocket();
     connect(socketClientBanque, &QTcpSocket::connected, this, &DAB_MainWindow::onQTcpSocket_connected);
     connect(socketClientBanque, &QTcpSocket::disconnected, this, &DAB_MainWindow::onQTcpSocket_disconnected);
     connect(socketClientBanque, &QTcpSocket::readyRead, this, &DAB_MainWindow::onQTcpSocket_readyRead);
@@ -16,12 +21,20 @@ DAB_MainWindow::DAB_MainWindow(QWidget *parent)
         &DAB_MainWindow::onQTcpSocket_error);
 }
 
+/**
+ * @brief DAB_MainWindow::~DAB_MainWindow
+ * @details Destructeur de l'interface principal
+ */
 DAB_MainWindow::~DAB_MainWindow()
 {
     delete ui;
+    delete boiteDeCreation;
 }
 
-
+/**
+ * @brief DAB_MainWindow::on_pushButtonConnexion_clicked
+ * @details Connexion apres demande de l'utilisateur
+ */
 void DAB_MainWindow::on_pushButtonConnexion_clicked()
 {
     if(ui->pushButtonConnexion->text() == "Connexion"){
@@ -32,6 +45,10 @@ void DAB_MainWindow::on_pushButtonConnexion_clicked()
     }
 }
 
+/**
+ * @brief DAB_MainWindow::onQTcpSocket_connected
+ * @details Quand le soket est connecté
+ */
 void DAB_MainWindow::onQTcpSocket_connected()
 {
     ui->listWidgetEtatConnexion->addItem("Connecté");
@@ -40,6 +57,10 @@ void DAB_MainWindow::onQTcpSocket_connected()
     ui->pushButtonNumeroCompte->setEnabled(true);
 }
 
+/**
+ * @brief DAB_MainWindow::onQTcpSocket_disconnected
+ * @details Quand le soket est deconnecté
+ */
 void DAB_MainWindow::onQTcpSocket_disconnected()
 {
     ui->listWidgetEtatConnexion->addItem("Déconnecté");
@@ -48,13 +69,24 @@ void DAB_MainWindow::onQTcpSocket_disconnected()
     ui->pushButtonNumeroCompte->setEnabled(false);
 }
 
+/**
+ * @brief DAB_MainWindow::onQTcpSocket_error
+ * @param socketError
+ * @details erreur de socket
+ */
 void DAB_MainWindow::onQTcpSocket_error(QAbstractSocket::SocketError socketError)
 {
 
 }
 
+/**
+ * @brief DAB_MainWindow::onQTcpSocket_readyRead
+ * @details Quand la soket recois des données | Traitement des differente commande
+ */
 void DAB_MainWindow::onQTcpSocket_readyRead()
 {
+    //Recuperation de la donnée
+    QChar commande;
     ui->listWidgetEtatConnexion->addItem("prêt pour la lecture");
     quint16 taille=0;
     QString message="";
@@ -62,13 +94,30 @@ void DAB_MainWindow::onQTcpSocket_readyRead()
         QDataStream in(socketClientBanque);
         in >> taille;
         if(socketClientBanque->bytesAvailable() >= (qint64)taille){
-            in >> message;
+            in >> commande;
+            switch(commande.toLatin1()){
+            case 'M' : in >> message;
+                ui->lineEditMessageBanque->setText(message);
+                break;
+            }
         }
     }
+
+    //Verification du message si le client demandé n'existe pas
+    if(message == "compte inexistant")
+    {
+        boiteDeCreation = new CreationClient(socketClientBanque, ui->spinBoxNumeroCompte->value());
+        boiteDeCreation->show();
+    }
+    //Affichage du message
     ui->lineEditMessageBanque->clear();
     ui->lineEditMessageBanque->setText(message);
 }
 
+/**
+ * @brief DAB_MainWindow::on_pushButtonNumeroCompte_clicked
+ * @details Quand le bouton du numero de compte est cliqués
+ */
 void DAB_MainWindow::on_pushButtonNumeroCompte_clicked()
 {
     if(ui->spinBoxNumeroCompte->value() > 0){
@@ -86,6 +135,10 @@ void DAB_MainWindow::on_pushButtonNumeroCompte_clicked()
     }
 }
 
+/**
+ * @brief DAB_MainWindow::on_pushButtonEnvoi_clicked
+ * @details Commande de demande de solde, depot ou retrais d'une somme donné
+ */
 void DAB_MainWindow::on_pushButtonEnvoi_clicked()
 {
     if(ui->spinBoxNumeroCompte->value() > 0){

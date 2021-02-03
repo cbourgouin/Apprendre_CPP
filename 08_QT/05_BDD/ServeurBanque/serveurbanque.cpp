@@ -34,10 +34,25 @@ void ServeurBanque::Stop()
 void ServeurBanque::EnvoyerMessage(QString msg, CompteClient *client)
 {
     quint16 tailleDonnees = 0;
+    QChar commande = 'M';
     QBuffer tampon;
     tampon.open(QIODevice::WriteOnly);
     QDataStream out(&tampon);
-    out << tailleDonnees << msg;
+    out << commande << tailleDonnees << msg;
+    tailleDonnees = tampon.size() - sizeof (tailleDonnees);
+    tampon.seek(0);
+    out << tailleDonnees;
+    client->write(tampon.buffer());
+}
+
+void ServeurBanque::EnvoyerAgence(QJsonObject msg, CompteClient *client)
+{
+    quint16 tailleDonnees = 0;
+    QChar commande = 'A';
+    QBuffer tampon;
+    tampon.open(QIODevice::WriteOnly);
+    QDataStream out(&tampon);
+    out << commande << tailleDonnees << msg;
     tailleDonnees = tampon.size() - sizeof (tailleDonnees);
     tampon.seek(0);
     out << tailleDonnees;
@@ -47,11 +62,12 @@ void ServeurBanque::EnvoyerMessage(QString msg, CompteClient *client)
 void ServeurBanque::onServeurBanque_newConnection()
 {
     while(hasPendingConnections()){
-        CompteClient *newClient = static_cast<CompteClient *>(nextPendingConnection());
+        CompteClient *newClient = new CompteClient;
+        newClient = static_cast<CompteClient *>(nextPendingConnection());
         connect(newClient, &QTcpSocket::readyRead, this, &ServeurBanque::onCompteClient_readyRead);
         connect(newClient, &QTcpSocket::disconnected, this, &ServeurBanque::onCompteClient_disconnected);
         lesConnexionsClients.append(newClient);
-        EnvoyerMessage("Connecté", lesConnexionsClients.last());
+        EnvoyerAgence("Connecté", lesConnexionsClients.last());
     }
 }
 
@@ -94,8 +110,11 @@ void ServeurBanque::onCompteClient_readyRead()
             if(client->bytesAvailable() >= (qint64)taille){
                 in >> commande;
                 switch (commande.toLatin1()) {
-                case 'N' :if(client->InterfaceAccesBDBanque_compteExiste()){
-                        message = "Bienvenue sur le compte " + QString::number(client->ObtenirNumCompte());
+                case 'N' :int nc;
+                    in >> nc;
+                    client->DefinirNumCompte(nc);
+                    if(client->InterfaceAccesBDBanque_compteExiste()){
+                        message = "Bienvenue sur le compte " + client->ObtenirNomCompte();
                         EnvoyerMessage(message, client);
                     }
                     else
@@ -118,7 +137,10 @@ void ServeurBanque::onCompteClient_readyRead()
                     EnvoyerMessage(message, client);
                     break;
                 case 'C' : in >> paramCreate;
-                    client->DefinirNumCompte(paramCreate);
+                    client->DefinirCompte(paramCreate);
+                    break;
+                case 'A' : EnvoyerAgence(client->bd->ObtenirAgence(), client);
+
                 }
             }
         }
